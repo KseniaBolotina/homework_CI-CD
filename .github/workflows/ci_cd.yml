@@ -1,9 +1,7 @@
 name: Django ci/cd
-
 on:
         push:
                 branches: [main]
-
 jobs:
         test:
                 runs-on: ubuntu-latest
@@ -17,7 +15,7 @@ jobs:
                         ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
                 services:
                         postgres_main:
-                                image: postgres: latest
+                                image: postgres:latest
                                 env:
                                         PG_USER: ${{ secrets.PG_USER }}
                                         PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
@@ -32,15 +30,12 @@ jobs:
                 steps:
                         - name: Проверяем репозиторий на наличие изменений
                           uses: actions/checkout@v2
-
                         - name: Установка python
                           uses: actions/setup-python@v2
                           with:
                                   python-version: 3.8
-
                         - name: Установка библиотек
                           run: pip install -r requirements.txt
-                        
                         - name: Тестинг
                           run: python manage.py test
                           env:
