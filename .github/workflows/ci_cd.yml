@@ -30,6 +30,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Clear Python cache
+        run: python -m pip cache purge
       - name: Checkout repository
         uses: actions/checkout@v3
 
