@@ -32,17 +32,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Clear Python pip cache
-        run: python -m pip cache purge
-
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.14
-
-      - name: Verify Python installation
-        run: python --version
-
+          python-version: 3.8
       - name: Install dpendecies
         run: pip install -r requirements.txt
 
@@ -54,6 +47,7 @@ jobs:
           PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
           PG_HOST: ${{ secrets.PG_HOST }}
           PG_PORT: ${{ secrets.PG_PORT }}
+          DEBUG: "0"
 
   deploy:
     runs-on: ubuntu-latest
